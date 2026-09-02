@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЮРИСТ.КРД.23 — Премиальное тендерное и юридическое сопровождение в Краснодаре</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f1123;
+            --bg-card: #171b36;
+            --gold: #dfb76c;
+            --gold-hover: #f3d293;
+            --text-white: #ffffff;
+            --text-gray: #a5a9c2;
+            --border: rgba(223, 183, 108, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(15, 17, 35, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .header-flex { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .phone-link {
+            color: var(--text-white);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 18px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-link:hover { color: var(--gold); }
+
+		        .hero {
+            padding: 180px 0 100px 0;
+            background: radial-gradient(circle at 80% 20%, rgba(223, 183, 108, 0.15) 0%, transparent 50%), var(--bg-dark);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span { color: var(--gold); }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-weight: 300;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #dfb76c 0%, #b89149 100%);
+            color: #0f1123;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(223, 183, 108, 0.3);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(223, 183, 108, 0.5);
+            background: linear-gradient(135deg, #f3d293 0%, #dfb76c 100%);
+        }
+
+        .features { padding: 60px 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .feature-card h3 { color: var(--gold); font-size: 20px; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        .feature-card p { color: var(--text-gray); font-size: 15px; }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 2px; background-color: var(--gold);
+        }
+
+        .services { padding: 100px 0; }
+        .accordion-item { background-color: var(--bg-card); border: 1px solid var(--border); margin-bottom: 15px; border-radius: 4px; overflow: hidden; }
+        .accordion-header { padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; transition: var(--transition); }
+        .accordion-header:hover { background-color: rgba(223, 183, 108, 0.05); }
+        .accordion-title { font-size: 20px; font-weight: 600; font-family: 'Playfair Display', serif; }
+        .accordion-icon { font-size: 22px; color: var(--gold); transition: var(--transition); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); padding: 0 30px; }
+        .accordion-item.active .accordion-content { max-height: 2000px; transition: max-height 0.4s cubic-bezier(1, 0, 1, 0); padding-bottom: 30px; border-top: 1px solid rgba(223, 183, 108, 0.1); padding-top: 20px; }
+        .accordion-item.active .accordion-icon { transform: rotate(45deg); color: var(--text-white); }
+
+        .price-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
+        .price-card { background: rgba(15, 17, 35, 0.5); border-left: 3px solid var(--gold); padding: 20px; border-radius: 0 4px 4px 0; }
+        .price-card h4 { font-size: 16px; margin-bottom: 8px; color: var(--text-white); }
+        .price-tag { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+        .price-card p { font-size: 14px; color: var(--text-gray); }
+
+        .note-box { background: rgba(223, 183, 108, 0.05); border: 1px dashed var(--gold); padding: 20px; margin-top: 25px; border-radius: 4px; font-size: 14px; color: var(--text-gray); }
+        .steps-section { padding: 100px 0; background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 50%, var(--bg-dark) 100%); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .step-item { text-align: center; position: relative; padding: 20px; }
+        .step-number { font-family: 'Playfair Display', serif; font-size: 54px; color: rgba(223, 183, 108, 0.15); font-weight: 700; line-height: 1; margin-bottom: -15px; }
+        .step-item h3 { font-size: 18px; margin-bottom: 10px; color: var(--gold); }
+        .step-item p { font-size: 14px; color: var(--text-gray); }
+
+        .final-cta { padding: 100px 0; text-align: center; background: radial-gradient(circle, rgba(223, 183, 108, 0.1) 0%, transparent 70%); }
+        .final-cta h2 { margin-bottom: 20px; }
+        .final-cta p { color: var(--text-gray); margin-bottom: 40px; font-size: 18px; }
+        .office-address { margin-top: 30px; font-size: 16px; color: var(--gold); letter-spacing: 1px; }
+
+        .requisites-section { padding: 40px 0; border-top: 1px solid var(--border); background-color: rgba(15, 17, 35, 0.8); }
+        .req-toggle { text-align: center; color: var(--text-gray); cursor: pointer; font-size: 14px; user-select: none; transition: var(--transition); }
+        .req-toggle:hover { color: var(--gold); }
+        .req-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; margin-top: 0; }
+        .req-content.open { max-height: 1000px; margin-top: 30px; }
+        .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; font-size: 13px; color: var(--text-gray); text-align: left; }
+        .req-block h4 { color: var(--gold); margin-bottom: 8px; font-size: 14px; }
+        .req-block p { margin-bottom: 4px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 15px; }
+            section h2 { font-size: 28px; }
+            .accordion-title { font-size: 16px; }
+            .accordion-header { padding: 20px; }
+            .cta-btn { padding: 15px 30px; font-size: 13px; width: 100%; text-align: center;}
+            .phone-link { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-flex">
+            <a href="#" class="logo-text">ЮРИСТ.КРД.23</a>
+            <a href="tel:+79882478797" class="phone-link">
+                <span>📞 +7 (988) 247-87-97</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Тендерное и юридическое сопровождение <br><span>высшего класса в Краснодаре</span></h1>
+            <p>Индивидуальный предприниматель Агамалян Артур Эдуардович. Защищаем ваши интересы, берем на себя взаимодействие с банками, УФАС и обеспечиваем безупречный допуск к торгам.</p>
+            <a href="tel:+79882478797" class="cta-btn">Связаться с юристом</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Абсолютная легитимность</h3>
+                    <p>Работаем исключительно официально. Заключаем прозрачный договор и предоставляем полный пакет закрывающих документов.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Премиальная скорость</h3>
+                    <p>Ценим ваше время. Готовы сформировать и выставить счет для безналичной оплаты в течение 15 минут.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Мгновенный старт</h3>
+                    <p>Эксперт приступает к глубокой проработке вашей задачи сразу после фиксации оплаты счета.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Направления и стоимость услуг</h2>
+
+            <!-- Тариф 1 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">1. Тендерное сопровождение организаций</div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="price-list">
+                        <div class="price-card">
+                            <h4>Тариф «Один тендер»</h4>
+                            <div class="price-tag">3 000 – 55 000 ₽</div>
+                            <p>Точечная поддержка: аудит документации, подготовка заявки, участие в торгах, подписание контракта.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Тариф «Пакетный» (5–10 тендеров)</h4>
+                            <div class="price-tag">20 000 – 200 000 ₽</div>
+                            <p>Регулярная основа на 3–6 месяцев. Мониторинг изменений, подача заявок и ведение процедур.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Тариф «Под ключ» (Безлимит)</h4>
+                            <div class="price-tag">От 22 000 ₽/мес. + комиссия</div>
+                            <p>Аналитика рынка, работа с претензиями, споры в УФАС. Комиссия с победы: 0,5–1,5% от суммы контракта.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Разовые услуги</h4>
+                            <p>• Подготовка заявки: 15 000–35 000 ₽<br>• Анализ рисков: 5 000–12 000 ₽<br>• Подбор тендеров: 7 000–15 000 ₽</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф 2 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">2. Участие физических лиц в тендерах</div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="price-list">
+                        <div class="price-card">
+                            <h4>Сопровождение одного лота</h4>
+                            <div class="price-tag">от 12 000 ₽</div>
+                            <p>Помощь в сборе документов, глубокий правовой анализ и поддержка во время аукциона.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Регулярный пакет участий</h4>
+                            <div class="price-tag">от 25 000 ₽</div>
+                            <p>Для постоянных торгов по выкупу имущества банкротов или работы в электронных магазинах (44-ФЗ).</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>КЭП и Настройка системы</h4>
+                            <div class="price-tag">5 000 – 10 000 ₽</div>
+                            <p>Координация получения подписи, установка КриптоПро, интеграция и регистрация в ЕИС.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Консультации и регистрация</h4>
+                            <p>• Правовой консалтинг физлиц: 3 000–6 000 ₽<br>• Аккредитация на ЭТП и ЕИС: 5 000–9 000 ₽</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф 3 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">3. Получение банковских гарантий и кредитов</div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="price-list">
+                        <div class="price-card">
+                            <h4>Сопровождение гарантии</h4>
+                            <div class="price-tag">3 000 – 7 000 ₽</div>
+                            <p>Сбор документов, подбор надежного банка, верификация текста гарантии под требования 44-ФЗ/223-ФЗ.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Экспресс-гарантия</h4>
+                            <div class="price-tag">+30% – 50% к базе</div>
+                            <p>Приоритетное ускоренное рассмотрение, минимизация запросов от комплаенса банка.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Кредитование бизнеса</h4>
+                            <div class="price-tag">5 000 – 15 000 ₽</div>
+                            <p>Подготовка финансовой отчетности, бизнес-плана и проведение переговоров о снижении ставок.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Особые услуги</h4>
+                            <p>• Анализ кредитоспособности: 5 000–10 000 ₽<br>• Помощь с залогом/поручителями: от 3 000 ₽</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф 4 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="accordion-title">4. Дополнительные правовые услуги</div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="price-list">
+                        <div class="price-card">
+                            <h4>Жалобы в ФАС</h4>
+                            <div class="price-tag">10 000 – 15 000 ₽</div>
+                            <p>Профессиональное составление жалоб в антимонопольную службу при нарушениях со стороны заказчиков.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Аудит контрагентов и рисков</h4>
+                            <div class="price-tag">3 000 – 8 000 ₽</div>
+                            <p>Проверка юридических лиц на банкротство, блокировки счетов, суды и нахождение в реестре РНП.</p>
+                        </div>
+                        <div class="price-card">
+                            <h4>Корпоративные процедуры</h4>
+                            <div class="price-tag">2 000 – 8 000 ₽</div>
+                            <p>Регистрация ИП/ООО, открытие расчетных счетов (2 000 ₽), выпуск МЧД (3 500–6 500 ₽).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Обратите внимание:</strong> Цены не являются фиксированной публичной офертой и рассчитываются индивидуально под техническое задание. Сложные ниши (строительство, гособоронзаказ) оцениваются выше.
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section">
+        <div class="container">
+            <h2>Участие в торгах без ЭЦП и сложной регистрации</h2>
+            <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: -30px auto 40px auto; font-weight: 300;">Мы можем пройти всю процедуру на торговой площадке по агентскому договору.</p>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <h3>Передача документов</h3>
+                    <p>Вы предоставляете базовый пакет документов нашему сотруднику (паспорт, ИНН).</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <h3>Наша работа</h3>
+                    <p>Мы заключаем агентский договор и полностью берем на себя все шаги на торговой площадке.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <h3>Победа и статус</h3>
+                    <p>В случае победы вы подписываете договор купли-продажи на себя и становитесь законным собственником.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>Требуется безупречный результат?</h2>
+            <p>Нажмите на кнопку ниже, чтобы совершить прямой звонок ведущему юристу.</p>
+            <a href="tel:+79882478797" class="cta-btn">📞 Позвонить: +7 (988) 247-87-97</a>
+            <div class="office-address">Прием клиентов в офисе: г. Краснодар, пр. Чекистов, 37</div>
+        </div>
+    </section>
+
+    <footer class="requisites-section">
+        <div class="container">
+            <div class="req-toggle" id="reqToggle">▶ Показать официальные реквизиты предприятия</div>
+            <div class="req-content" id="reqContent">
+                <div class="req-grid">
+                    <div class="req-block">
+                        <h4>Общие сведения</h4>
+                        <p><strong>Наименование:</strong> ИП Агамалян Артур Эдуардович</p>
+                        <p><strong>Юр. адрес:</strong> г. Краснодар, ул. Урицкого, 139</p>
+                    </div>
+                    <div class="req-block">
+                        <h4>Коды и учет</h4>
+                        <p><strong>ИНН:</strong> 230801255220</p>
+                        <p><strong>ОГРНИП:</strong> 305230820800036</p>
+                    </div>
+                    <div class="req-block">
+                        <h4>Банковские реквизиты</h4>
+                        <p><strong>Банк:</strong> ООО «ОЗОН Банк»</p>
+                        <p><strong>Р/счет:</strong> 40802810800000348190</p>
+                        <p><strong>БИК:</strong> 044525068</p>
+                    </div>
+                    <div class="req-block">
+                        <h4>Контакты</h4>
+                        <p><strong>Email:</strong> yurist.krd.23@mail.ru</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionItem = button.parentElement;
+                accordionItem.classList.toggle('active');
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== accordionItem) item.classList.remove('active');
+                });
+            });
+        });
+
+        const reqToggle = document.getElementById('reqToggle');
+        const reqContent = document.getElementById('reqContent');
+        reqToggle.addEventListener('click', () => {
+            reqContent.classList.toggle('open');
+            reqToggle.textContent = reqContent.classList.contains('open') ? '▼ Скрыть реквизиты предприятия' : '▶ Показать официальные реквизиты предприятия';
+        });
+    </script>
+</body>
+</html>
