@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const formData = new FormData(form);
             const payload = Object.fromEntries(formData.entries());
 
-            fetch('https://formsubmit.co/ajax/yurist.krd.23@mail.ru', {
+            fetch('https://formsubmit.co/ajax/0d29fe2fbcbf01ef9df28943dd267f40', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
