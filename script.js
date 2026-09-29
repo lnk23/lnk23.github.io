@@ -77,59 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // FormSubmit AJAX. The first submission triggers one-time email activation.
-    if (form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            if (!consentInput.checked) {
-                consentInput.focus();
-                return;
-            }
-
-            status.textContent = 'Отправка заявки…';
-            status.className = 'form-status';
-
-            const formData = new FormData(form);
-            const payload = Object.fromEntries(formData.entries());
-
-            fetch('https://formsubmit.co/ajax/0d29fe2fbcbf01ef9df28943dd267f40', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(function (response) {
-                return response.json().then(function (data) {
-                    return { ok: response.ok, data: data };
-                });
-            })
-            .then(function (result) {
-                if (!result.ok || result.data.success === false) {
-                    throw new Error('Form submission failed');
-                }
-
-                status.textContent = 'Спасибо! Заявка отправлена. Мы свяжемся с вами.';
-                status.className = 'form-status success';
-                form.reset();
-
-                setTimeout(function () {
-                    closeModal();
-                }, 1800);
-            })
-            .catch(function () {
-                status.textContent = 'Не удалось отправить заявку. Позвоните по номеру +7 (988) 247-87-97.';
-                status.className = 'form-status error';
-            });
-        });
-    }
+    // The contact form uses a native POST directly to FormSubmit.
+    // No JavaScript interception is used, so the browser can follow FormSubmit's response.
 
     // Cookie notice: shown once until the visitor accepts it.
     const cookieBanner = document.getElementById('cookieBanner');
