@@ -77,8 +77,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Send the contact form through FormSubmit AJAX.
-    if (form) {
+    // EmailJS form submission.
+    // Replace these three values after creating the EmailJS service/template.
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+    if (form && typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -87,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            const submitButton = form.querySelector('button[type=\"submit\"]');
+            const submitButton = form.querySelector('button[type="submit"]');
             if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.textContent = 'Отправка…';
@@ -97,51 +104,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 status.className = 'form-status';
             }
 
-            const payload = {
-                name: nameInput ? nameInput.value.trim() : '',
-                phone: phoneInput ? phoneInput.value.trim() : '',
-                personal_data_consent: 'Согласие предоставлено',
-                _subject: 'Новая заявка с сайта yuristkrd23.ru',
-                _template: 'table',
-                _url: 'https://yuristkrd23.ru/'
-            };
-
-            fetch('https://formsubmit.co/ajax/yurist.krd.23@mail.ru', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(function (response) {
-                return response.json().then(function (data) {
-                    if (!response.ok) {
-                        throw new Error(data.message || ('HTTP ' + response.status));
-                    }
-                    return data;
-                });
-            })
-            .then(function (data) {
-                if (data.success === 'true' || data.success === true) {
+            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+                .then(function () {
                     window.location.href = 'thanks.html';
-                    return;
-                }
-                throw new Error(data.message || 'FormSubmit не подтвердил отправку.');
-            })
-            .catch(function (error) {
-                if (status) {
-                    status.textContent = 'Не удалось отправить заявку. Позвоните по номеру +7 (988) 247-87-97.';
-                    status.className = 'form-status error';
-                }
-                console.error('FormSubmit error:', error);
-            })
-            .finally(function () {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Отправить заявку';
-                }
-            });
+                })
+                .catch(function (error) {
+                    console.error('EmailJS error:', error);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Отправить заявку';
+                    }
+                    if (status) {
+                        status.textContent = 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.';
+                        status.className = 'form-status error';
+                    }
+                });
         });
     }
 
