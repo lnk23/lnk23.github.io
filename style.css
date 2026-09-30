@@ -152,7 +152,7 @@ section h2::after {
     transition: var(--transition);
 }
 .accordion-header:hover { background-color: rgba(223, 183, 108, 0.05); }
-.accordion-title { font-size: 22px; font-weight: 600; font-family: 'Playfair Display', serif; }
+.accordion-title { font-size: 20px; font-weight: 600; font-family: 'Playfair Display', serif; }
 .accordion-icon { font-size: 22px; color: var(--gold); transition: var(--transition); }
 .accordion-content {
     max-height: none;
@@ -428,8 +428,8 @@ section h2::after {
 .service-subtitle {
     font-family: 'Playfair Display', serif;
     color: var(--gold);
-    font-size: 29px;
-    margin: 34px 0 14px;
+    font-size: 25px;
+    margin: 30px 0 12px;
 }
 .service-text {
     color: var(--text-gray);
@@ -465,40 +465,3 @@ section h2::after {
     font-size: 14px;
 }
 .standalone-card { margin-top: 10px; }
-
-
-/* Service chapters */
-.services-chapter {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold);
-    font-size: 32px;
-    line-height: 1.2;
-    margin: 34px 0 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(223, 183, 108, 0.22);
-}
-.services-chapter:first-of-type { margin-top: 10px; }
-.tender-intro {
-    background: rgba(15, 17, 35, 0.5);
-    border: 1px solid rgba(223, 183, 108, 0.12);
-    padding: 30px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-.tender-intro-title {
-    font-family: 'Playfair Display', serif;
-    color: var(--text-white);
-    font-size: 25px;
-    margin: 0 0 10px;
-}
-.tender-intro-lead {
-    text-align: left !important;
-    color: var(--text-gray) !important;
-    max-width: none !important;
-    margin: 0 0 28px !important;
-}
-@media (max-width: 600px) {
-    .services-chapter { font-size: 27px; }
-    .service-subtitle { font-size: 25px; }
-    .tender-intro { padding: 22px; }
-}

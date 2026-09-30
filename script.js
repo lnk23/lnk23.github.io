@@ -77,11 +77,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // FormSubmit: use regular POST instead of AJAX.
-    // This avoids CORS/AJAX issues and lets FormSubmit handle the redirect to thanks.html.
+    // Send the contact form through FormSubmit AJAX.
     if (form) {
-        form.addEventListener('submit', function () {
-            const submitButton = form.querySelector('button[type="submit"]');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const submitButton = form.querySelector('button[type=\"submit\"]');
             if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.textContent = 'Отправка…';
@@ -90,6 +96,52 @@ document.addEventListener('DOMContentLoaded', function () {
                 status.textContent = 'Отправляем заявку…';
                 status.className = 'form-status';
             }
+
+            const payload = {
+                name: nameInput ? nameInput.value.trim() : '',
+                phone: phoneInput ? phoneInput.value.trim() : '',
+                personal_data_consent: 'Согласие предоставлено',
+                _subject: 'Новая заявка с сайта yuristkrd23.ru',
+                _template: 'table',
+                _url: 'https://yuristkrd23.ru/'
+            };
+
+            fetch('https://formsubmit.co/ajax/yurist.krd.23@mail.ru', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(function (response) {
+                return response.json().then(function (data) {
+                    if (!response.ok) {
+                        throw new Error(data.message || ('HTTP ' + response.status));
+                    }
+                    return data;
+                });
+            })
+            .then(function (data) {
+                if (data.success === 'true' || data.success === true) {
+                    window.location.href = 'thanks.html';
+                    return;
+                }
+                throw new Error(data.message || 'FormSubmit не подтвердил отправку.');
+            })
+            .catch(function (error) {
+                if (status) {
+                    status.textContent = 'Не удалось отправить заявку. Позвоните по номеру +7 (988) 247-87-97.';
+                    status.className = 'form-status error';
+                }
+                console.error('FormSubmit error:', error);
+            })
+            .finally(function () {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Отправить заявку';
+                }
+            });
         });
     }
 
